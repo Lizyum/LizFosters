@@ -1,33 +1,29 @@
 import Header from '../Components/Header';
+import Card from '../Components/Card';
+import Aliciapfp from '../assets/bubble-wrap-alicia.jpg';
+import Nivenpfp from '../assets/niven-posing.jpg';
+import React, {useState} from 'react';
+import {Toggle} from '../Components/Toggle';
+import { FontChanger } from '../Components/FontChanger';
 
 export default function Fosters_Page(){
+    const [isDark, setIsDark] = useState(true);
+
     return (
-        <div className="container">
+        <div className="container" data-theme={isDark ? "dark" : "light"}>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="fosters.html">Current Fosters</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="home">Home</a></li>
+                <li><a href="fosters">Current Fosters</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
-            <button type="button" id="dark-mode-toggle" onClick={() => changetoDark()}>Dark Mode</button>
-            <button type="button" id="font-changer" onClick={() => changeFont()}>Change Font</button>
+            <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
+            <FontChanger />
         </nav>
         <main>
             <h1>Current Fosters!</h1>
-            <div className="foster">
-                <img src="img/clingy-alicia.jpg" alt="Picture of Cat" style={{ width: '100px', height: '100px' }} />
-                <div className="details">
-                    <h2><a href="alicia.html">Alicia</a></h2>
-                    <p>A lovable, gentle cat -- Alicia is the sweetest cat you could ever meet!</p>
-                </div>
-            </div> 
-            <div className="foster">
-                <img src="img/niven-posing.jpg" alt="Picture of Dog" style={{ width: '100px', height: '100px' }} />
-                <div className="details">
-                    <h2><a href="niven.html">Niven</a></h2>
-                    <p>If you want a super goofy dog that will light up your day, come meet Niven!</p>
-                </div>
-            </div>
+            <Card page="alicia"src={Aliciapfp} alt="Picture of cat" name= "Alicia" description="A lovable, gentle cat -- Alicia is the sweetest cat you could ever meet!"/>
+            <Card page="niven" src={Nivenpfp} alt="Picture of dog" name="Niven" description="If you want a super goofy dog that will light up your day, meet Niven!" />
         </main>
     </div>
     );

@@ -1,3 +1,60 @@
+/* CSS Variables */
+:root {
+  --background-color: white;
+  --foreground-color: #007bff;
+  --hover-color: #0056b3;
+  --primary-text-color: black;
+  --secondary-text-color: white;
+  --toggle-bg: #2f2e2e;
+  --toggle-fg: #007bff;
+
+}
+
+/* Dark Mode */
+[data-theme="dark"] {
+  --background-color: #2f2e2e;
+  --foreground-color: #015bba;
+  --primary-text-color: white;
+  --hover-color: #007bff;
+  --secondary-text-color: black;
+  --toggle-bg: #333;
+}
+
+/* Card Styles */
+
+.card {
+  border: 1 px solid hsl(0, 0%, 79%)00;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.11);
+  padding: 20px;
+  margin: 10 px;
+  text-align: center;
+  max-width: 250px;
+  display: inline-block;
+  background-color: var(--background-color);
+}
+
+.card .card-image{
+  max-width: 60%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card .card-title {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  color: var(--primary-text-color)
+}
+
+.card .card-text {
+  font-family: Arial, sans-serif;
+  color: var(--primary-text-color)
+}
+
+.card:hover {
+  background-color: var(--hover-color);
+}
 
 /* General Styles */
 body {
@@ -8,19 +65,23 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   min-height: 100vh;
-  background-color: #f0f2f5;
-  color: #333;
+  background-color: var(--background-color);
+  color: var(--primary-text-color);
 }
 
 .container {
   display: flex;
   width: 100%;
+  background-color: var(--background-color);
+  min-height: 100vh;
+  min-width: 100vw;
 }
+
 
 /* Navigation */
 nav {
   width: 200px;
-  background-color: #007bff;
+  background-color: var(--foreground-color);
   height: 100vh;
   position: fixed;
   top: 0;
@@ -46,30 +107,78 @@ nav ul li a {
   width: 100%;
   padding: 15px 20px;
   text-decoration: none;
-  color: #fff;
+  color: white;
   font-weight: bold;
   transition: background-color 0.3s ease;
 }
 
 nav ul li a:hover {
-  background-color: #0056b3;
+  background-color: var(--hover-color);
 }
 
-#dark-mode-toggle, #font-changer {
-  display: block;
-  width: calc(75% - 50px); /* Adjust width to match the nav items */
-  margin: 50px 20px;
-  padding: 15px 0;
+.toggle-container {
+  position: absolute;
+  top: 20em;
+  right: 0.7em;
+  font-size: 0.9em;
+}
+
+.toggle {
+  visibility: hidden;
+}
+
+.toggle + label {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: white;
+}
+
+.toggle + label::before {
+  content: "";
+  height: 1em;
+  width: 2em;
+  border-radius: 1em;
+  background-color: var(--toggle-bg);
+  margin-right: 0.5em;
+  transition: background-color 250ms ease-in-out;
+}
+
+.toggle + label::after {
+  content: "";
+  height: 0.8em;
+  width: 0.8em;
+  border-radius: 1em;
+  background-color: var(--toggle-fg);
+  position: absolute;
+  left: 0.2em;
+  transition: background-color 250ms ease-in-out, transform 250ms ease-in-out;
+}
+
+.toggle:checked + label::after {
+  transform: translateX(100%);
+}
+
+.font-changer-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.font-changer-btn {
+  padding: 10px 20px;
   background-color: #333;
   color: #fff;
   border: none;
-  text-align: center;
-  cursor: pointer;
-  font-size: 14px;
   border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }
 
-#dark-mode-toggle:hover, #font-changer:hover {
+.font-changer-btn:hover {
   background-color: #555;
 }
 
@@ -82,13 +191,14 @@ main {
 
 h1 {
   font-size: 2em;
-  color: #007bff;
+  color: var(--foreground-color);
   margin-bottom: 10px;
 }
 
 p {
   margin-bottom: 20px;
   line-height: 1.6;
+  color:var(--primary-text-color)
 }
 
 img {
@@ -97,8 +207,24 @@ img {
   border-radius: 8px;
 }
 
+.email-btn {
+  padding: 10px 20px;
+  background-color: var(--foreground-color); /* Dark background */
+  color: #fff; /* White text */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+.email-btn:hover {
+  background-color: var(--toggle-fg); /* Slightly lighter background on hover */
+}
+
+
 /* Foster Section */
-.foster {
+/* .foster {
   display: flex;
   align-items: center;
   margin-bottom: 20px;
@@ -120,15 +246,15 @@ img {
 .details p {
   margin: 0;
   color: #666;
-}
+} */
 
 /* Buttons */
 .back-button, .apply-button {
   display: inline-block;
   margin-bottom: 20px;
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: var(--foreground-color);
+  color: var(--primary-text-color-color);
   text-decoration: none;
   border-radius: 5px;
   text-align: center;
@@ -136,11 +262,11 @@ img {
 }
 
 .back-button:hover, .apply-button:hover {
-  background-color: #0056b3;
+  background-color: var(--hover-color);
 }
 
 /* Gallery */
-.gallery {
+/* .gallery {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
@@ -149,7 +275,7 @@ img {
 .gallery img {
   width: calc(50% - 10px);
   margin-bottom: 20px;
-}
+} */
 
 /* 
  :root {

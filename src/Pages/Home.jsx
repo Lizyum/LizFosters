@@ -1,21 +1,28 @@
 import Header from '../Components/Header';
+import me_img from "../assets/me.jpg";
+import React, {useState} from 'react';
+import {Toggle} from '../Components/Toggle';
+import { FontChanger } from '../Components/FontChanger';
+
 
 export default function Home(){
+    const [isDark, setIsDark] = useState(true);
     return (
-        <div className="container">
+        <div className="container" data-theme={isDark ? "dark" : "light"}>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="fosters.html">Current Fosters</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a href="home">Home</a></li>
+                <li><a href="fosters">Current Fosters</a></li>
+                <li><a href="contact">Contact</a></li>
             </ul>
-            <button type="button" id="dark-mode-toggle" onClick={() => changetoDark()}>Dark Mode</button>
-            <button type="button" id="font-changer" onClick={() => changeFont()}>Change Font</button>
+            <Toggle isChecked={isDark} handleChange={() => setIsDark(!isDark)} />
+            <FontChanger />
+
         </nav>
         <main>
             <h1>Hey!</h1>
             <p>My name is Lizbeth. I foster animals and post them here so their forever homes can find them!</p>
-            <img src="img/me.jpg" alt="Welcome Image" style={{ width: '700px', height: '500px' }} />
+            <img src={me_img} alt="Welcome Image" style={{ width: '700px', height: '500px' }} />
         </main>
     </div>
     );
